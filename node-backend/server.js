@@ -5,11 +5,11 @@ const app = express();
 app.use(express.json());
 
 const pool = new Pool({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'todo_app',
-    password: 'password',  
-    port: 5433,  
+    user: 'aaronwan',
+    host: 'db',
+    database: 'mydb',
+    password: 'mysecretpassword',  
+    port: 5432,  
 });
 
 app.get("/", (req, res) => res.send("Healthy!"));
@@ -29,7 +29,6 @@ app.post("/todos", async (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 
-const server = app.listen(PORT, () => {
-    	const serverUrl = `http://localhost:${PORT}`;
-    	console.log(`Server running at ${serverUrl}`);
+const server = app.listen(PORT, '0.0.0.0', () => {
+    	console.log(`Server running at port ${PORT}`);
 });

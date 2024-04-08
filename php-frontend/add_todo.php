@@ -2,7 +2,7 @@
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $title = $_POST['title'];
     if (!empty($title)) {
-        $apiUrl = "http://localhost:3000/todos"; // Change this to your actual Node.js backend URL
+        $apiUrl = "http://backend:3000/todos"; // Change this to your actual Node.js backend URL
         $data = json_encode(["title" => $title]);
 
         // Use cURL to send a POST request to the backend

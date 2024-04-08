@@ -1,6 +1,5 @@
 <?php
-// Fetch ToDo items from the backend
-$apiUrl = "http://localhost:3000/todos"; // Change this to your actual Node.js backend URL
+$apiUrl = "http://backend:3000/todos";
 $todos = json_decode(file_get_contents($apiUrl));
 ?>
 
@@ -10,7 +9,7 @@ $todos = json_decode(file_get_contents($apiUrl));
     <title>ToDo List</title>
 </head>
 <body>
-    <h1>ToDo List</h1>
+    <h1>ToDo List Test</h1>
 
     <!-- ToDo Display -->
     <ul>

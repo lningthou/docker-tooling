@@ -1,0 +1,54 @@
+version: '3.8'
+services:
+  frontend:
+    build:
+      context: ./php-frontend
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "3002:3002"
+    volumes:
+      - ./php-frontend:/var/www/html
+    command: php -S 0.0.0.0:3002 -t /var/www/html
+
+    depends_on:
+      - backend
+    networks:
+      - network
+
+  backend:
+    build:
+      context: ./node-backend
+      dockerfile: Dockerfile.backend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./node-backend:/usr/src/app
+    expose:
+      - "3000"
+    depends_on:
+      - db
+    networks:
+      - network
+
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: aaronwan
+      POSTGRES_PASSWORD: mysecretpassword  
+      POSTGRES_DB: mydb 
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    expose:
+      - "5432"
+    networks:
+      - network
+
+volumes:
+  pgdata:
+
+networks:
+  network:
+    driver: bridge
